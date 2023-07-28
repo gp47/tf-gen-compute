@@ -11,7 +11,7 @@ variable "ami_id" {
 variable "instance_type" {
   type        = string
   description = "The EC2 Instance Type."
-  default = "t2.micro"
+  default     = "t2.micro"
 }
 
 variable "ssh_hey" {
