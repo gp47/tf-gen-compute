@@ -15,7 +15,7 @@ module "ec2_instance" {
   key_name               = var.ssh_hey
   monitoring             = false
   vpc_security_group_ids = [module.base_sg.security_group_id]
-  subnet_id              = var.ec2_subnet
+  subnet_id              = element(var.private_subnets, 0)
 
   tags = var.tags
 }
@@ -32,30 +32,9 @@ module "base_sg" {
   description = "Base EC2 security group"
   vpc_id      = var.vpc_id
 
-  # ingress
-  ingress_with_cidr_blocks = [
-    {
-      from_port   = 22
-      to_port     = 22
-      protocol    = "tcp"
-      description = "ssh"
-      cidr_blocks = [ "0.0.0.0/0", ]
-    },
-  ]
-
-  # egress
-  egress = [
-    {
-      from_port        = 0
-      to_port          = 0
-      ipv6_cidr_blocks = []
-      prefix_list_ids  = []
-      protocol         = "-1"
-      self             = false
-      description      = ""
-      cidr_blocks      = [ "0.0.0.0/0", ]
-    }
-  ]
+  ingress_cidr_blocks = ["0.0.0.0/0"]
+  ingress_rules       = ["http-80-tcp", "all-icmp"]
+  egress_rules        = ["all-all"]
 
   tags = var.tags
 }

@@ -19,11 +19,6 @@ variable "ssh_hey" {
   description = "The ssh key name."
 }
 
-variable "ec2_subnet" {
-  type        = string
-  description = "The EC2 Subnet Id."
-}
-
 variable "tags" {
   type        = map(string)
   description = "Tags assigned to the created resources"
@@ -38,4 +33,9 @@ variable "vpc_cidr" {
 variable "vpc_id" {
   type        = string
   description = "The ID of the VPC."
+}
+
+variable "private_subnets" {
+  type        = list(string)
+  description = "The list of private subnets"
 }
