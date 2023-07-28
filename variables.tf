@@ -39,3 +39,13 @@ variable "private_subnets" {
   type        = list(string)
   description = "The list of private subnets"
 }
+
+variable "rds_sg" {
+  type        = string
+  description = "The RDS SG."
+}
+
+variable "ibase_sg_cb" {
+  type        = string
+  description = "The Ingress Base_SG cidr blocks."
+}
